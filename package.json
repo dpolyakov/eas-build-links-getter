@@ -1,6 +1,6 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "eas-build-links-getter",
+  "version": "0.0.1",
   "private": true,
   "description": "TypeScript template action",
   "main": "lib/main.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/dpolyakov/eas-build-links-getter .git"
   },
   "keywords": [
     "actions",

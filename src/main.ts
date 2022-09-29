@@ -1,16 +1,22 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {easInfo} from './eas';
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const appVersion: string = core.getInput('appVersion')
+    const exclude: string = core.getInput('exclude')
+    core.debug(JSON.stringify({
+      appVersion,
+      exclude
+    }, null, 2)) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const result = await easInfo(appVersion);
 
-    core.setOutput('time', new Date().toTimeString())
+    if (result !== null) {
+      core.setOutput('ios', result.IOS)
+      core.setOutput('android', result.ANDROID)
+    }
+
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
